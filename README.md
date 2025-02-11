@@ -54,8 +54,6 @@ This application consists of two main parts:
   - View detailed information about each movie.
   - Rate movies.
   - Search for movies by title.
-
-- **Nice to Have:**
   - Pagination of movie list.
   - Movie search by title.
   
