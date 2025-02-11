@@ -85,7 +85,7 @@ This application consists of two main parts:
    ```
 3.Build and run the Spring Boot application:
 ```
- mvnw spring-boot:run
+ mvn spring-boot:run
 ```
 
 The backend will be available at http://localhost:8080.
