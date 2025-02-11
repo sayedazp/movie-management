@@ -1,2 +1,83 @@
-“System Requirements ------------------- * Java 17+ (For the Spring Boot application) * Node.js and npm (For the Angular frontend) * Angular CLI (For building the Angular frontend) * H2 Database (in-memory database for simplicity) Setup Instructions ------------------ ### Backend (Spring Boot) 1. Clone the repository: bash CopyEdit `git clone https://github.com/<username>/movie-management-app.git cd movie-management-app` 2. Navigate to the `backend` directory: bash CopyEdit `cd backend` 3. Build and run the Spring Boot application: bash CopyEdit `./mvnw spring-boot:run` The backend will be available at `http://localhost:8080`. 4. Add your **OMDB API Key** in `application.properties`: properties CopyEdit `omdb.api.key=your_omdb_api_key` ### Frontend (Angular) 1. Navigate to the `frontend` directory: bash CopyEdit `cd ../frontend` 2. Install the required dependencies: bash CopyEdit `npm install` 3. Build and serve the Angular application: bash CopyEdit `ng serve` The frontend will be available at `http://localhost:4200`. Running the Application ----------------------- 1. Start the backend application (Spring Boot). 2. Start the frontend application (Angular). 3. Access the application in your browser at `http://localhost:4200`. * **Admin Login:** `/admin/login` * **User Login:** `/user/login` * **Movie List:** `/movies` API Endpoints ------------- ### Admin APIs 1. **Add a Movie:** * `POST /movies/add` * Request body: `ToAddMovie` * Adds a single movie to the database. 2. **Add Multiple Movies:** * `POST /movies/add-all` * Request body: `List<ToAddMovie>` * Adds multiple movies to the database. 3. **Delete a Movie:** * `DELETE /movies/delete/{id}` * Deletes a movie by its ID. 4. **Delete Multiple Movies:** * `POST /movies/delete/all` * Request body: `List<Long>` * Deletes multiple movies by their IDs. 5. **Rate a Movie:** * `POST /movies/rate` * Request body: `RatedMovie` * Allows the admin to rate a movie. 6. **Get Average Movie Rating:** * `GET /movies/rate/avg/{id}` * Returns the average rating for a specific movie. ### User APIs 1. **View All Movies:** * `GET /movies/all` * Fetches a paginated list of all movies available. 2. **Rate a Movie:** * `POST /movies/rate` * Request body: `RatedMovie` * Allows a user to rate a movie. 3. **Search Movies:** * `GET /movies/search` * Request parameters: `page`, `size`, `searchTerm` * Fetches movies based on search term (title). 4. **Get Movie Rating for User:** * `GET /movies/rate/{id}` * Returns the rating given by the user for a specific movie. Database -------- This application uses **H2 Database**, which is an in-memory database. The data will be lost when the application is restarted. For persistent storage, a persistent database like MySQL or PostgreSQL could be configured.”
+# Movie Management Application
 
+This is a Movie Management Application built using **Angular**, **Spring Boot**, and an **H2 Database**. The application provides functionalities for both admin and regular users to manage and view movies, including features such as adding, deleting, rating movies, and searching movies.
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [System Requirements](#system-requirements)
+- [Setup Instructions](#setup-instructions)
+  - [Backend (Spring Boot)](#backend-spring-boot)
+  - [Frontend (Angular)](#frontend-angular)
+- [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+  - [Admin APIs](#admin-apis)
+  - [User APIs](#user-apis)
+- [Database](#database)
+- [License](#license)
+
+## Project Overview
+
+This application consists of two main parts:
+
+1. **Admin Dashboard:**
+   - Admin users can add or remove movies to/from the database.
+   - Admin can add movies individually or in bulk.
+   - Admin can delete movies from the database.
+   - Admin can rate movies.
+
+2. **Regular User Dashboard:**
+   - Regular users can view the list of movies added by the admin.
+   - Users can view detailed information about each movie.
+   - Users can rate movies.
+   - Users can search for movies by title.
+
+### Bonus Features:
+- Batch adding/removing movies by admin.
+- Pagination in the movie list.
+- Movie ratings by users.
+
+## Features
+
+- **Admin Functions:**
+  - Login functionality for the admin.
+  - Add movies individually (`/movies/add`) or in bulk (`/movies/add-all`).
+  - Delete movies individually (`/movies/delete/{id}`) or in bulk (`/movies/delete/all`).
+  - Rate movies using `/movies/rate`.
+  - View and manage the movie list with pagination.
+
+- **User Functions:**
+  - Login functionality for regular users.
+  - View the full list of movies with pagination.
+  - View detailed information about each movie.
+  - Rate movies.
+  - Search for movies by title.
+
+- **Nice to Have:**
+  - Pagination of movie list.
+  - Movie search by title.
+  
+## Technologies Used
+
+- **Backend:** Spring Boot, Java 17
+- **Frontend:** Angular 16+
+- **API:** OMDB API (https://www.omdbapi.com/)
+- **Database:** H2 Database (in-memory)
+  
+## System Requirements
+
+- Java 17+ (For the Spring Boot application)
+- Node.js and npm (For the Angular frontend)
+- Angular CLI (For building the Angular frontend)
+- H2 Database (in-memory database for simplicity)
+
+## Setup Instructions
+
+### Backend (Spring Boot)
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<username>/movie-management-app.git
+   cd movie-management-app
