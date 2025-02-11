@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AverageMovieRate, MovieDetailed, MoviesSearchReturn, OMBDMovie, RatedMovie, SearchFilters } from '../../types';
 import { Observable } from 'rxjs';
+import { environment } from '../../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class MoviesService {
 
   private apiUrl = 'https://www.omdbapi.com/';
-  private apiKey = 'f1a699c2';
+  private apiKey = environment.omdbApiKey;
   private localServer = "http://localhost:8080/"
   constructor(private httpClient:HttpClient) { 
   }

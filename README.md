@@ -79,5 +79,35 @@ This application consists of two main parts:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<username>/movie-management-app.git
-   cd movie-management-app
+   cd movie-management
+   ```
+2. Navigate to backend:
+   ```bash
+   cd fawry-task
+   ```
+3.Build and run the Spring Boot application:
+```
+ mvnw spring-boot:run
+```
+
+The backend will be available at http://localhost:8080.
+
+### Frontend (Angular)
+
+1. Navigate to the `frontend` directory.
+
+2. Install the required dependencies:
+   - Run `npm install` to install all the necessary npm packages listed in the `package.json` file.
+
+3. Build and serve the Angular application:
+   - Use the `ng serve` command to build and serve the Angular application. This will launch the app and it will be available at `http://localhost:4200`.
+
+## Running the Application
+
+1. Start the backend application (Spring Boot).
+2. Start the frontend application (Angular).
+3. Access the application in your browser at `http://localhost:4200`.
+
+
+
+

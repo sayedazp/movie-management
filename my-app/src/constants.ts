@@ -19,3 +19,6 @@ export const rolesAccess:any =
         },
         
     ]
+export const environment = {
+    omdbApiKey: 'f1a699c2'
+};
