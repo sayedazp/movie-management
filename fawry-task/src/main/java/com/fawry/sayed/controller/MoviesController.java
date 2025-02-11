@@ -54,7 +54,7 @@ public class MoviesController {
 		moviesServices.addMovie(movie);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}	
-	@PostMapping("add-all")
+	@PostMapping("add/all")
 	ResponseEntity<Void> addMovies(@RequestBody List<ToAddMovie> movies){
 		moviesServices.addMovies(movies);
 		return ResponseEntity.status(HttpStatus.CREATED).build();

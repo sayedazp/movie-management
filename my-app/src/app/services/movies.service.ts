@@ -49,7 +49,7 @@ export class MoviesService {
   }
 
   addMovies(movies:OMBDMovie[]):Observable<object>{
-    return this.httpClient.post<any>(this.localServer.concat('movies/add-all'), movies, {withCredentials: true});
+    return this.httpClient.post<any>(this.localServer.concat('movies/add/all'), movies, {withCredentials: true});
   }
 
   deleteMovie(id:Number):Observable<object>{

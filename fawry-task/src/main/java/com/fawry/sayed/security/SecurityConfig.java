@@ -52,15 +52,15 @@ public class SecurityConfig {
         return http.csrf().disable().cors().and()
         		.headers().frameOptions().sameOrigin().and()
         		
-        		.authorizeRequests().requestMatchers("/login").permitAll().and()
-        		.authorizeRequests().requestMatchers("/login2").permitAll().and()
+        		.authorizeRequests().requestMatchers("/login").permitAll().and()   		
         		
-        		.authorizeRequests().requestMatchers("movies/**").authenticated().and()
-//        		.authorizeRequests().requestMatchers("/movies/**").permitAll().and()
+        		.authorizeRequests().requestMatchers("/movies/**").authenticated().and()
+        		.authorizeRequests().requestMatchers("/movies/add/**").hasAnyRole("ADMIN").and()
+        		.authorizeRequests().requestMatchers("/movies/delete/**").hasAnyRole("ADMIN").and()
+        		.authorizeRequests().requestMatchers("/login").permitAll().and()
                 .addFilterBefore(customUserPasswordAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
         		 .addFilterBefore(jwtAuthenticationFilter, CustomUserPasswordAuthenticationFilter.class)
         		 .addFilterBefore(exceptionHandlingFilter, JwtAuthenticationFilter.class)
-        		 
         		 .sessionManagement(sess -> sess
         	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // No sessions
         	            )
