@@ -34,7 +34,7 @@ This application consists of two main parts:
    - Users can rate movies.
    - Users can search for movies by title.
 
-### Bonus Features:
+### Bonus :
 - Batch adding/removing movies by admin.
 - Pagination in the movie list.
 - Movie ratings by users.
