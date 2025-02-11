@@ -94,12 +94,15 @@ The backend will be available at http://localhost:8080.
 
 ### Frontend (Angular)
 
+
 1. Navigate to the `frontend` directory.
 
 2. Install the required dependencies:
    - Run `npm install` to install all the necessary npm packages listed in the `package.json` file.
 
-3. Build and serve the Angular application:
+3. Define `omdbApiKey` at `src/constants`.
+
+4. Build and serve the Angular application:
    - Use the `ng serve` command to build and serve the Angular application. This will launch the app and it will be available at `http://localhost:4200`.
 
 ## Running the Application
