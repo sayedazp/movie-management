@@ -1,0 +1,113 @@
+<div class="projects-section">
+    <div class="projects-section-header">
+      <p>Add new movies</p>
+      <div class="">
+        <form (ngSubmit)="onSubmit()" style="display: flex;">
+            <div class="search-wrapper" >
+            <!-- <label for="title">Title</label> -->
+            <input class="search-input" type="text" id="title" [(ngModel)]="filters.s" name="s" placeholder="Enter movie title">
+            </div>
+            <div class="search-wrapper" >
+            <!-- <label for="year">Year</label> -->
+            <input class="search-input" type="text" id="year" [(ngModel)]="filters.y" name="y" placeholder="Enter release year">
+            </div>
+            <!-- <label for="genre">Genre</label>
+            <input type="text" id="genre" [(ngModel)]="filters.genre" name="genre" placeholder="Enter genre"> -->
+            <div class="search-wrapper">
+            <label for="type">Type</label>
+            <select id="type" [(ngModel)]="filters.type" name="type">
+              <option value="">Any</option>
+              <option value="movie">Movie</option>
+              <option value="series">Series</option>
+              <option value="episode">Episode</option>
+            </select>
+            </div>
+        
+            <button type="submit" style="margin-left:5%; padding:0 3%">Search</button>
+          </form>
+          <div class="bulk-controllers" *ngIf="selected.size != 0">
+            <span>Control selected:</span>
+            <button (click)="onAddMovies(selected)">Add All</button>
+                <!-- <button  style="margin-left:5%; padding:0 3%">Search</button> -->
+          </div>
+          
+       
+      </div>
+      <!-- <p class="time">December, 12</p> -->
+    </div>
+   
+    <div class="projects-section-line">
+      <div class="projects-status">
+        <div class="item-status">
+          <span class="status-number">45</span>
+          <span class="status-type">In Progress</span>
+        </div>
+        <div class="item-status">
+          <span class="status-number">24</span>
+          <span class="status-type">Upcoming</span>
+        </div>
+        <div class="item-status">
+          <span class="status-number">62</span>
+          <span class="status-type">Total Projects</span>
+        </div>
+      </div>
+      <div class="view-actions">
+        <button [class.active]="viewType === 'list'" (click)="setView('list')" class="view-btn list-view" title="List View">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
+            <line x1="8" y1="6" x2="21" y2="6" />
+            <line x1="8" y1="12" x2="21" y2="12" />
+            <line x1="8" y1="18" x2="21" y2="18" />
+            <line x1="3" y1="6" x2="3.01" y2="6" />
+            <line x1="3" y1="12" x2="3.01" y2="12" />
+            <line x1="3" y1="18" x2="3.01" y2="18" /></svg>
+        </button>
+        <button [class.active]="viewType === 'grid'" (click)="setView('grid')" class="view-btn grid-view" title="Grid View">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" /></svg>
+        </button>
+      </div>
+    </div>
+    <div class="project-boxes" [ngClass]="viewClass">
+        <div *ngFor="let movie of movies" class="project-box-wrapper">
+            <div class="project-box" [ngClass]="{'selected-movie': selected.has(movie.imdbID)}"
+                >
+            <div class="project-box-header">
+                <span>{{ movie.Year }}</span>
+                <div class="more-wrapper">
+                <button class="project-btn-more" (click)="onSelectMovie(movie)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                    <circle cx="12" cy="12" r="5" [attr.fill]="selected.has(movie.imdbID) ? 'green' : ''" fill="green" />
+                    <!-- <circle cx="12" cy="5" r="1" />
+                    <circle cx="12" cy="19" r="1" /> -->
+                </svg>
+                </button>
+                </div>
+            </div>
+            <div class="project-box-content-header">
+                <p class="box-content-header">{{ movie.Title }}</p>
+                <p class="box-content-subheader">{{movie.Type}}</p>
+            </div>
+            <!-- <div class="box-progress-wrapper">
+                <p class="box-progress-header">Progress</p>
+                <div class="box-progress-bar">
+                <span class="box-progress" style="width: 50%; background-color: #4f3ff0"></span>
+                </div>
+                <p class="box-progress-percentage">50%</p>
+            </div> -->
+            <div class="project-box-footer">
+                
+                <button *ngIf="!movie.Persisted" class="days-left" (click)="onAddMovie(movie)" style="color: #4f3ff0;">
+                Add to database
+                </button>
+                <div   *ngIf="movie.Persisted" class="days-left" style="color: #44bc6e;">
+                    Added to database
+                </div>
+            </div>
+            </div>
+        </div>
+</div>
+
+</div>

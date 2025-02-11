@@ -1,0 +1,43 @@
+<!-- <p>movie is here</p> -->
+<div *ngIf="isLoading" class="loading-spinner">
+    <mat-progress-spinner mode="indeterminate" diameter="50" color="accent"></mat-progress-spinner>
+    <p>Loading movie details...</p>
+</div>
+<mat-card *ngIf="!isLoading && !err"  class="movie-card">
+    <mat-card-header>
+      <mat-card-title>{{ movie.Title }} ({{ movie.Year }})</mat-card-title>
+      <mat-card-subtitle>{{ movie.Rated }} | {{ movie.Released }} | {{ movie.Runtime }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <img mat-card-image [src]="movie.Poster" alt="{{movie.Title}}">
+      <div class="genres">
+        <strong>Genres:</strong> {{ movie.Genre }}
+      </div>
+  
+      <mat-divider></mat-divider>
+  
+      <div class="ratings">
+        <h3>Ratings:</h3>
+        <ul>
+          <li *ngFor="let rating of movie.Ratings">
+            <strong>{{ rating.Source }}:</strong> {{ rating.Value }}
+          </li>
+        </ul>
+      </div>
+  
+      <mat-divider></mat-divider>
+  
+      <div class="plot">
+        <h3>Plot:</h3>
+        <p>{{ movie.Plot }}</p>
+      </div>
+       <mat-divider></mat-divider>
+    <app-rating [rating]=userRating [avg]="avgRating" (ratingUpdated)="onRatingUpdated($event)"></app-rating>
+    </mat-card-content>
+  
+    <!-- <mat-card-actions>
+      <button mat-button color="primary">Add to Watchlist</button>
+      <button mat-button color="accent">More Info</button>
+    </mat-card-actions> -->
+</mat-card>
+

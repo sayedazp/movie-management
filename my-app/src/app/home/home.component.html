@@ -1,0 +1,37 @@
+<div class="app-container">
+    <div class="app-header">
+      <div class="app-header-left">
+        <span class="app-icon"></span>
+        <p class="app-name">Movies Dashboard</p>
+      </div>
+      <div class="app-header-right">
+        <button class="mode-switch"  (click)="toggleDarkMode()" title="Switch Theme">
+          <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+            <defs></defs>
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+          </svg>
+        </button>
+        
+        <button class="profile-btn">
+          <!-- <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" /> -->
+          <span>{{user?.email}}</span>
+        </button>
+      </div>
+    </div>
+    <div class="app-content">
+      <div class="app-sidebar">
+        <a routerLink="/home/manage-movies" routerLinkActive="active" class="app-sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" /></svg>
+        </a>
+        <a routerLink="/home/add-movies" *ngIf="isAdmin()" routerLinkActive="active" class="app-sidebar-link">
+            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" /></svg>
+        </a>
+      </div>
+     <router-outlet style="display: flex;"></router-outlet>
+  </div>
+  </div>
+  
