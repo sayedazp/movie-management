@@ -63,6 +63,8 @@ This application consists of two main parts:
 - Pagination in the movie list. [done]
 
 - Movie ratings by users. [done]
+  
+- Usee `HTTPONLY cookie` to exchange the JWT token, as it would be prone to js manipulation in client side.
 
 - Swagger Api docs, can be accessed at `/swagger-ui/index.html`
 
