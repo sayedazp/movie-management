@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +30,20 @@ public class FawryTaskApplication implements ApplicationRunner{
 	@Autowired
 	private PasswordEncoder encoder;
 	
+
+    @Value("${security.user.admin.mail}")
+    private String adminMail;
+   
+    @Value("${security.user.admin.password}")
+    private String adminpass;
+   
+    @Value("${security.user.client.mail}")
+    private String userMail;
+    
+    @Value("${security.user.client.password}")
+    private String userPass;
+   
+	
 	public static void main(String[] args) {
 		SpringApplication.run(FawryTaskApplication.class, args);
 	}
@@ -36,31 +51,21 @@ public class FawryTaskApplication implements ApplicationRunner{
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		User user1 = new User();
-		user1.setEmail("sayed@gmail.com");
-		user1.setPassword(encoder.encode("12345678"));
+		user1.setEmail(adminMail);
+		user1.setPassword(encoder.encode(adminpass));
 		Authority auth =  new Authority();
 		auth.setName("ROLE_ADMIN");
 		user1.setRole(Set.of(auth));
 
 		User user2 = new User();
-		user2.setEmail("sayed@sayed.com");
-		user2.setPassword(encoder.encode("12345678"));
+		user2.setEmail(userMail);
+		user2.setPassword(encoder.encode(userPass));
 		Authority auth2 =  new Authority();
 		auth2.setName("ROLE_USER");
 		user2.setRole(Set.of(auth2));
 
 		userRepository.saveAll(List.of(user1, user2) );
-		
-		Movie m1 = new Movie();
-		m1.setImdbId("dasdsad");
-		m1.setTitle("Matrix");
-		m1.setType(Type.EPISODE);
 
-		Movie m2 = new Movie();
-		m2.setImdbId("dasdsad2");
-		m2.setTitle("Matrix2");
-		m2.setType(Type.MOVIE);
-		movieRepository.saveAll(List.of(m1, m2));
 	}
 
 }
