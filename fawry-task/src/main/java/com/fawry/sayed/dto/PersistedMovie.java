@@ -4,11 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fawry.sayed.entities.Movie;
 import com.fawry.sayed.entities.Type;
 
-public class PersistedMovie {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
+public class PersistedMovie {
+	
+	@NotNull(message="movie id should be provided")
 	private Long id;
 
 	@JsonProperty("Title")
+	@NotBlank(message="movie title should be provided")
 	private String title;
 	
 	@JsonProperty("Year")

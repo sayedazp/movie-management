@@ -1,10 +1,20 @@
 package com.fawry.sayed.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class AverageMovieRating {
 	
+	
+	@NotNull(message = "Movie id should be provided")
 	private Long id;
 	
-	private Double avgRating;	
+	
+	@Min(value = 0, message = "The rating should be at least 1")
+	@Max(value = 5, message = "The rating should be 5 max")
+	private Double avgRating;
 	
 	public AverageMovieRating(Long id, Double avgRating) {
 		this.id = id;

@@ -21,7 +21,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		this.logger.debug("Sending 401 Unauthorized error");
+		logger.debug("Sending 401 Unauthorized error");
 		//propagate error handling to the handler filter
 		throw exception;
 

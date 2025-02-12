@@ -4,14 +4,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fawry.sayed.entities.Movie;
 import com.fawry.sayed.entities.Type;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class ToAddMovie {
+	
+	
 	@JsonProperty("Title")
+	@NotBlank(message = "movie title should be provided!")
 	private String title;
 	
 	@JsonProperty("Year")
 	private Integer releaseYear;
 	
 	@JsonProperty("imdbID")
+	@NotBlank(message = "movie imdbid should be provided!")
 	private String imdbId;
 	
 	@JsonProperty("Type")
@@ -19,7 +25,6 @@ public class ToAddMovie {
 	
 	
 	public ToAddMovie(String title, Integer releaseYear, String imdbId, Type type, String poster) {
-//		super();
 		this.title = title;
 		this.releaseYear = releaseYear;
 		this.imdbId = imdbId;

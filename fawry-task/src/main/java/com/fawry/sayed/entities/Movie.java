@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
 
 
 
@@ -22,11 +25,14 @@ public class Movie {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonIgnore
 	private Long id;
 	
+	
+	@NotBlank(message = "The movie title should not be blank.")
 	private String title;
-
+	
+	
+	
     private Integer releaseYear;
     
     @OneToMany(mappedBy = "movie")
@@ -34,10 +40,15 @@ public class Movie {
     
 
 	//  movie, series, episode
+    
+ 
 	@Enumerated(EnumType.STRING)
 	private Type type;
 
 	private String poster;
+	
+	@NotBlank(message = "imbdb id should be provided!")
+	@Column(unique = true)
 	private String imdbId;
 
 	  

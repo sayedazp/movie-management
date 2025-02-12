@@ -3,11 +3,15 @@ package com.fawry.sayed.dto;
 import java.util.List;
 
 public class PaginatedResponse<T> {
+
+	
     private List<T> content;
     private int pageNumber;
     private int pageSize;
     private long totalElements;
     private int totalPages;
+   
+    
 	public List<T> getContent() {
 		return content;
 	}

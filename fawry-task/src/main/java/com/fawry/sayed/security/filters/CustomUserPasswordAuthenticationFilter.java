@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fawry.sayed.dto.LoginRequest;
 import com.fawry.sayed.dto.LoginResponse;
+import com.fawry.sayed.exceptions.MalformedRequestException;
 import com.fawry.sayed.security.CustomAuthenticationFailureHandler;
 import com.fawry.sayed.services.JWTService;
 
@@ -79,11 +80,9 @@ public class CustomUserPasswordAuthenticationFilter extends UsernamePasswordAuth
 			String password = login.getPassword();
 	        UsernamePasswordAuthenticationToken authenticationToken = UsernamePasswordAuthenticationToken.unauthenticated(email, password);
 	        return getAuthenticationManager().authenticate(authenticationToken);
-		}catch (DatabindException dBE){
-			throw new RuntimeException("Please make sure you are entering valid input", dBE);
-		} 
+		}
 		catch (IOException e) {
-			throw new RuntimeException("lol", e);
+			throw new MalformedRequestException("Please Make sure you send a valid input", e);
 		}
     }
 

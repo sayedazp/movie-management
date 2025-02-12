@@ -37,14 +37,14 @@ public class FawryTaskApplication implements ApplicationRunner{
 	public void run(ApplicationArguments args) throws Exception {
 		User user1 = new User();
 		user1.setEmail("sayed@gmail.com");
-		user1.setPassword(encoder.encode("123456"));
+		user1.setPassword(encoder.encode("12345678"));
 		Authority auth =  new Authority();
 		auth.setName("ROLE_ADMIN");
 		user1.setRole(Set.of(auth));
 
 		User user2 = new User();
 		user2.setEmail("sayed@sayed.com");
-		user2.setPassword(encoder.encode("123456"));
+		user2.setPassword(encoder.encode("12345678"));
 		Authority auth2 =  new Authority();
 		auth2.setName("ROLE_USER");
 		user2.setRole(Set.of(auth2));

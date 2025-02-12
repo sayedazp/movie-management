@@ -15,6 +15,10 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "fawry_user")
@@ -23,7 +27,13 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Email(message = "Please use a proper email format")
+	@NotBlank(message = "User email cannot be blank")
 	private String email;
+	
+	@NotBlank(message="Password cannot be blank!")
+//	@Size(min = 8, max = 25, message = "The password should be at least 8 chars and 25 at max.")
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

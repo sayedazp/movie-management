@@ -4,10 +4,20 @@ import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginResponse {
 	
+	
+	@Email(message = "Please use a proper email format")
+	@NotBlank(message = "User email cannot be blank")
 	private String email;
+	
+	@NotBlank(message = "Token cannot be empty")
 	private String token;
+	
+	@NotBlank(message = "User roles should be provided!")
 	private Collection<? extends GrantedAuthority> role;
 	 
 	public Collection<? extends GrantedAuthority> getRole() {

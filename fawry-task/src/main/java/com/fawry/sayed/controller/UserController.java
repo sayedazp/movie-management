@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fawry.sayed.services.AuthServices;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.NotBlank;
 
 @RestController()
 @RequestMapping("auth")
@@ -29,9 +30,9 @@ public class UserController {
 	}
 	
 	@GetMapping("is-auth")
-	public ResponseEntity<Boolean> isAuth(@CookieValue(value = "JWt") String token,
+	public ResponseEntity<Boolean> isAuth(@CookieValue(value = "JWt") @NotBlank(message = "token should be provided")
+	String token,
 			@RequestParam(name = "mail", required = true) String mail){
-		
 		return ResponseEntity.ok(authServices.isAuthenticated(token, mail));
 		
 	}

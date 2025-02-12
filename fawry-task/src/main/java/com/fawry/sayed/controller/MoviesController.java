@@ -29,6 +29,8 @@ import com.fawry.sayed.repositories.MovieRepository;
 import com.fawry.sayed.services.MoviesServices;
 
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("movies")
@@ -50,12 +52,12 @@ public class MoviesController {
 		return moviesServices.getMovies(page, size);
 	}
 	@PostMapping("add")
-	ResponseEntity<Void> addMovie(@RequestBody ToAddMovie movie){
+	ResponseEntity<Void> addMovie(@RequestBody @Valid ToAddMovie movie){
 		moviesServices.addMovie(movie);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}	
 	@PostMapping("add/all")
-	ResponseEntity<Void> addMovies(@RequestBody List<ToAddMovie> movies){
+	ResponseEntity<Void> addMovies(@RequestBody @Valid List<ToAddMovie> movies){
 		moviesServices.addMovies(movies);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
@@ -68,13 +70,14 @@ public class MoviesController {
 	
 	//delete mapping
 	@PostMapping("delete/all")
-	ResponseEntity<Void> deleteAllSelectedMovies(@RequestBody List<Long> ids){
+	ResponseEntity<Void> deleteAllSelectedMovies(@RequestBody @NotBlank(message = "movies ids should provided")
+	List<Long> ids){
 		moviesServices.deleteAllSelected(ids);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping("rate")
-	ResponseEntity<RatedMovie> rateMovie(@RequestBody RatedMovie ratedMovie){
+	ResponseEntity<RatedMovie> rateMovie(@RequestBody @Valid RatedMovie ratedMovie){
 		RatedMovie rm = moviesServices.rateMovie(ratedMovie);
 		return ResponseEntity.ok(rm);
 	}
