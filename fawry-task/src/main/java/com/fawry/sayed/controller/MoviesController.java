@@ -2,7 +2,6 @@ package com.fawry.sayed.controller;
 
 import java.util.List;
 
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -31,6 +30,7 @@ import com.fawry.sayed.services.MoviesServices;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("movies")
@@ -70,7 +70,7 @@ public class MoviesController {
 	
 	//delete mapping
 	@PostMapping("delete/all")
-	ResponseEntity<Void> deleteAllSelectedMovies(@RequestBody @NotBlank(message = "movies ids should provided")
+	ResponseEntity<Void> deleteAllSelectedMovies(@RequestBody @NotNull(message = "movies ids should provided")
 	List<Long> ids){
 		moviesServices.deleteAllSelected(ids);
 		return ResponseEntity.noContent().build();

@@ -12,7 +12,7 @@ import com.fawry.sayed.repositories.UserRepository;
 import com.fawry.sayed.security.decorators.UserDecoratorDetails;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService, AuthServices{
+public class CustomUserDetailsService implements UserDetailsService{
 	
 	private final UserRepository userRepository;
 	
@@ -31,10 +31,5 @@ public class CustomUserDetailsService implements UserDetailsService, AuthService
 		return new UserDecoratorDetails(user);
 	}
 
-	@Override
-	public boolean isAuthenticated(String token, String mail) {
-		// TODO Auto-generated method stub
-		UserDetails userDetails = loadUserByUsername(mail);
-		return jwtService.isTokenValid(token, userDetails);
-	}
+	
 }

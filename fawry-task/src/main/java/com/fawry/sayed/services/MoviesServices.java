@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -73,12 +74,16 @@ public class MoviesServices {
         return response;
         }
 	public void deleteMovie(Long id) {
+		if ( !movieRepository.existsById(id)) {
+			throw new EntityNotFoundException("No movie with the specified id");
+		};
 		movieRepository.deleteById(id);
 	}
 
 	@Transactional	
 	public void deleteAllSelected(List<Long> ids) {
 		entityManager.flush();
+		ratingRepository.deleteAllInBatchByMovieIdIn(ids);
 		movieRepository.deleteAllInBatchByIdIn(ids);
 	}
 	
@@ -86,12 +91,12 @@ public class MoviesServices {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth == null) {
-			throw new RuntimeException("Authentication needed");
+			throw new BadCredentialsException("Authentication needed");
 		}
 		Movie movie = movieRepository.findById(ratedMovie.getMovieId())
 				.orElseThrow(()->
 				new EntityNotFoundException("No movie with the specified id")); 
-		User user = userRepository.findByEmail(auth.getName()).orElseThrow(()->new EntityNotFoundException());
+		User user = userRepository.findByEmail(auth.getName()).orElseThrow(()->new EntityNotFoundException("No user Assosiated"));
 		Rating rating = ratingRepository.findByUserAndMovie(user, movie, Rating.class).orElse(new Rating());
 		rating.setRate(ratedMovie.getRating());
 		rating.setUser(user);
@@ -107,15 +112,15 @@ public class MoviesServices {
 	public RatedMovie getMovieRateUser(Long id) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth == null) {
-			throw new RuntimeException("Authentication needed");
+			throw new BadCredentialsException("Authentication needed");
 		}
-		User user = userRepository.findByEmail(auth.getName()).orElseThrow(()->new EntityNotFoundException());
+		User user = userRepository.findByEmail(auth.getName()).orElseThrow(()->new EntityNotFoundException("No User Assosiated"));
 		Movie movie = movieRepository.findById(id)
 				.orElseThrow(()->
 				new EntityNotFoundException("No movie with the specified id")); 
 		return ratingRepository.findByUserAndMovie(user, movie, RatedMovie.class).orElseThrow(()->new EntityNotFoundException("Not found rating"));
 	}
-	
+
 	public PaginatedResponse<PersistedMovie> searchMovies(int page, int size, String searchTerm){
 		Pageable pageable = PageRequest.of(page, size);
 		Page<PersistedMovie> moviePage = movieRepository.searchByTitleorType(pageable, searchTerm);
@@ -128,5 +133,3 @@ public class MoviesServices {
         return response;
 	}
 }
-
-
