@@ -26,10 +26,10 @@ public class JWTService {
 	
     public static final String COOKIE_NAME = "JWt";
 
-	@Value("${security.jwt.secret-key}")
+	@Value("${security.jwts.secret-key}")
     private String secretKey;
 
-    @Value("${security.jwt.expiration-time}")
+    @Value("${security.jwts.expiration-time}")
     private int jwtExpiration;
     
     

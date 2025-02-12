@@ -73,17 +73,6 @@ export class MoviesService {
     return this.httpClient.get<any>(this.localServer.concat(`movies/rate/avg/${id}`), {withCredentials: true});
   }
 
-  // private handleError(error: HttpErrorResponse) {
-  //   let errorMessage = 'An unknown error occurred!';
-  //   if (error.error instanceof ErrorEvent) {
-  //     // Client-side or network error
-  //     errorMessage = `Error: ${error.error.message}`;
-  //   } else {
-  //     // Backend error (e.g., 404 or 500)
-  //     errorMessage = `Server returned code: ${error.status}, error message is: ${error.message}`;
-  //   }
-  //   return throwError(errorMessage);  // Return an observable with the error message
-  // }
 }
 
 
